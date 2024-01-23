@@ -1,0 +1,41 @@
+runtime: nodejs21
+env: standard
+instance_class: F1 # F1 instances are eligible for Always Free tier
+
+automatic_scaling:
+  min_idle_instances: 0 # May scale down to 0 to minimize costs
+  max_idle_instances: 1 # Keep at most 1 idle instance to handle sudden load
+  min_instances: 1 # Keep 1 instance running always (within the free tier limit)
+  max_instances: 5 # Automatically scale up to 5 instances (adjust as needed)
+  target_cpu_utilization: 0.6 # Scale up when CPU utilization gets high
+  target_throughput_utilization: 0.75
+  cool_down_period_sec: 60 # Wait period before scaling down
+  max_concurrent_requests: 10 # Number of concurrent requests before scaling up
+
+# Health checks for automatic scaling
+readiness_check:
+  path: "/liveness_check" # Replace with the path to your readiness check endpoint
+  check_interval_sec: 5
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+  app_start_timeout_sec: 300
+
+liveness_check:
+  path: "/liveness_check" # Replace with the path to your liveness check endpoint
+  check_interval_sec: 30
+  timeout_sec: 4
+  failure_threshold: 2
+  success_threshold: 2
+
+# Handlers define how to respond to requests to your application.
+handlers:
+  - url: /.*
+    script: auto
+    secure: always # Enforce HTTPS
+
+env_variables:
+  NODE_ENV: "production"
+  # Define additional environment variables here
+  # API_KEY: 'your-api-key'
+  # DATABASE_URL: 'your-database-url'
