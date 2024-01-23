@@ -32,7 +32,7 @@ app.use(limiter);
 app.use(json());
 
 // Routes
-app.use("/api/ping", pingRouter);
+app.use("/api/liveness_check", pingRouter);
 app.use("/api/test-error", errorTestRoutes);
 
 // Error Handling Middleware
