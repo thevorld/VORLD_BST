@@ -1,22 +1,22 @@
 import { Request, Response, NextFunction } from "express";
 import { RandomErrorGenerator } from "../../../utils/Tests/randomErrorGenerator";
 import { ErrorHandler } from "../../../types/errorHandler";
-import logger from "../../../utils/logger"; // Import the logger
+import logger from "../../../utils/logger";
 
-export const errorTestController = (
+export const errorTestController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    logger.info("Received request at /api/test-error"); // Log receiving a request
+    logger.info("Received request at /api/test-error");
 
-    RandomErrorGenerator(); // This might throw an error
+    await RandomErrorGenerator();
 
     res.json({ message: "No error occurred" });
-    logger.info("Response sent from /api/test-error"); // Log successful response
+    logger.info("Response sent from /api/test-error");
   } catch (error) {
-    logger.error("Error occurred in errorTestController: %o", error); // Log the error
+    logger.error("Error occurred in errorTestController: %o", error);
 
     if (error instanceof ErrorHandler) {
       next(error);
