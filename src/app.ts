@@ -38,7 +38,7 @@ app.use("/api/test-error", errorTestRoutes);
 // Error Handling Middleware
 app.use(customErrorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 export default app;
