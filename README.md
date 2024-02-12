@@ -1,4 +1,6 @@
-Welcome to our VORLD backend server template project! This open-source repository is designed to kickstart your back-end server deployment with a focus on security, logging, and seamless deployment capabilities. Aimed at developers looking to integrate advanced features like custom user creation, and Solana blockchain technology for the integration of tokens, NFTs, and cNFTs into their applications, this template serves as a robust starting point, saving you time and effort in setting up your project infrastructure. 
+<!-- @format -->
+
+Welcome to our VORLD backend server template project! This open-source repository is designed to kickstart your back-end server deployment with a focus on security, logging, and seamless deployment capabilities. Aimed at developers looking to integrate advanced features like custom user creation, and Solana blockchain technology for the integration of tokens, NFTs, and cNFTs into their applications, this template serves as a robust starting point, saving you time and effort in setting up your project infrastructure.
 
 **Features**
 Security: Pre-configured security settings to safeguard your application.
@@ -34,6 +36,9 @@ bash
 Copy code
 yarn install
 Configure your environment variables in the .env file according to the env.example provided.
+
+if you are on windows update package.json
+"dev": "nodemon --watch \"src/\*_/_.ts\" --exec \"node_modules/.bin/ts-node\" src/app.ts"
 
 Deployment
 Follow the steps in the GitHub Actions file .github/workflows/main.yml to set up your CI/CD pipeline for deployment to Cloud Run.
