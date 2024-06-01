@@ -11,4 +11,3 @@ export class ErrorHandler extends Error {
     Object.setPrototypeOf(this, new.target.prototype); // Set the prototype explicitly
   }
 }
-

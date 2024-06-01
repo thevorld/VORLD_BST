@@ -3,6 +3,7 @@ import { RandomErrorGenerator } from "../../../utils/Tests/randomErrorGenerator"
 import { ErrorHandler } from "../../../types/errorHandler";
 import logger from "../../../utils/logger";
 
+// Refactored errorTestController with improved error handling
 export const errorTestController = async (
   req: Request,
   res: Response,
@@ -20,10 +21,11 @@ export const errorTestController = async (
 
     if (error instanceof ErrorHandler) {
       next(error);
-    } else if (error instanceof Error) {
-      next(new ErrorHandler(500, error.message));
     } else {
-      next(new ErrorHandler(500, "An unknown error occurred"));
+      const status = error instanceof Error ? 500 : 500;
+      const message =
+        error instanceof Error ? error.message : "An unknown error occurred";
+      next(new ErrorHandler(status, message));
     }
   }
 };
