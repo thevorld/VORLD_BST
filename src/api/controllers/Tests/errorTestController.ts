@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { RandomErrorGenerator } from "../../../utils/Tests/randomErrorGenerator";
-import { ErrorHandler } from "../../../types/errorHandler";
+import {
+  ErrorHandler,
+  ValidationError,
+  NotFoundError,
+  DatabaseError,
+} from "../../../types/errorHandler";
 import logger from "../../../utils/logger";
 
 // Refactored errorTestController with improved error handling
@@ -16,7 +21,7 @@ export const errorTestController = async (
 
     res.json({ message: "No error occurred" });
     logger.info("Response sent from /api/test-error");
-  } catch (error) {
+  } catch (error: unknown) {
     logger.error("Error occurred in errorTestController: %o", error);
 
     if (error instanceof ErrorHandler) {

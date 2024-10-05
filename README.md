@@ -56,3 +56,26 @@ Acknowledgements
 Our community of developers, people from the Solana Foundation, the superteam and contributors for their ongoing support.
 
 **Full Changelog**: https://github.com/thevorld/VORLD_BST/commits/BST-1.0.0
+
+## Database Setup
+
+### MongoDB
+
+- Ensure MongoDB is installed and running.
+- Set the `MONGO_URI` in your `.env` file.
+
+### SQL Database (PostgreSQL)
+
+- Ensure PostgreSQL is installed and running.
+- Set the `SQL_URI` in your `.env` file.
+
+**Database Configuration**
+
+You can enable or disable database connections using environment variables:
+
+- `USE_MONGO_DB`: Set to `"true"` to enable MongoDB connection, `"false"` to disable.
+- `USE_SQL_DB`: Set to `"true"` to enable SQL database connection, `"false"` to disable.
+
+**Readiness Check**
+
+The readiness check now verifies the connectivity of both MongoDB and SQL databases. Ensure your databases are running and accessible for the server to be considered "ready."

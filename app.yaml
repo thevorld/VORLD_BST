@@ -14,7 +14,7 @@ automatic_scaling:
 
 # Health checks for automatic scaling
 readiness_check:
-  path: "/liveness_check" # Replace with the path to your readiness check endpoint
+  path: "/api/readiness_check"
   check_interval_sec: 5
   timeout_sec: 4
   failure_threshold: 2
@@ -22,7 +22,7 @@ readiness_check:
   app_start_timeout_sec: 300
 
 liveness_check:
-  path: "/liveness_check" # Replace with the path to your liveness check endpoint
+  path: "/liveness_check"
   check_interval_sec: 30
   timeout_sec: 4
   failure_threshold: 2
@@ -36,6 +36,8 @@ handlers:
 
 env_variables:
   NODE_ENV: "production"
+  USE_MONGO_DB: "false" # Set to "false" to disable MongoDB
+  USE_SQL_DB: "false" # Set to "false" to disable SQL DB
   # Define additional environment variables here
   # API_KEY: 'your-api-key'
   # DATABASE_URL: 'your-database-url'
