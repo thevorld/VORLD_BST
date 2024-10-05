@@ -1,6 +1,5 @@
 import winston from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
-import { Loggly } from "winston-loggly-bulk";
 
 require("dotenv").config();
 
@@ -31,12 +30,6 @@ const logger = winston.createLogger({
       maxSize: "20m",
       maxFiles: "30d",
     }),
-    new Loggly({
-      token: process.env.LOGGLY_TOKEN!,
-      subdomain: process.env.LOGGLY_SUBDOMAIN!,
-      tags: ["Winston-NodeJS", process.env.NODE_ENV || "development"],
-      json: true,
-    }),
   ],
 });
 
@@ -53,12 +46,12 @@ if (process.env.NODE_ENV !== "production") {
 export default logger;
 
 process.on("unhandledRejection", (reason, promise) => {
-  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+  logger.error("Unhandled Rejection at:", promise, "reason:", reason);
   // Application specific logging, throwing an error, or other logic here
 });
 
 process.on("uncaughtException", (error) => {
-  console.error("Uncaught Exception thrown:", error);
+  logger.error("Uncaught Exception thrown:", error);
   // Application specific logging, throwing an error, or other logic here
   process.exit(1); // Exit the process to avoid unknown states
 });
